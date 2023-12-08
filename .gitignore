@@ -1,1 +1,5 @@
 VulkanTest
+compile.sh
+test_shader.frag.spv
+test_shader.vert.spv
+vkvia.html
