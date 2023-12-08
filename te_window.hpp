@@ -11,9 +11,16 @@ namespace te {
             TeWindow(int w, int h, std::string name);
             ~TeWindow();
 
+            TeWindow(const TeWindow &) = delete;
+            TeWindow &operator=(const TeWindow &) = delete;
+
+            inline bool should_close() {
+                return glfwWindowShouldClose(window);
+            }
+
         private:
 
-            void initWindow();
+            void init_window();
 
             int width;
             int height;
