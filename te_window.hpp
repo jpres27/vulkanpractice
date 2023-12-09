@@ -1,32 +1,32 @@
 #pragma once
 
 #define GLFW_INCLUDE_VULKAN
-#include <GLFW/glfw3.h>t
+#include <GLFW/glfw3.h>
 #include <string>
 
 namespace te {
 
-    class TeWindow {
-        public:
-            TeWindow(int w, int h, std::string name);
-            ~TeWindow();
+class TeWindow {
+    public:
+        TeWindow(int w, int h, std::string name);
+        ~TeWindow();
 
-            TeWindow(const TeWindow &) = delete;
-            TeWindow &operator=(const TeWindow &) = delete;
+        TeWindow(const TeWindow &) = delete;
+        TeWindow &operator=(const TeWindow &) = delete;
 
-            inline bool should_close() {
-                return glfwWindowShouldClose(window);
-            }
+        inline bool should_close() {
+            return glfwWindowShouldClose(window);
+        }
 
-        private:
+    private:
 
-            void init_window();
+        void init_window();
 
-            int width;
-            int height;
+        int width;
+        int height;
 
-            //DO NOT USE STD::STRING - REPLACE THIS LATER
-            std::string window_name;
-            GLFWwindow *window;
-    };
+        //DO NOT USE STD::STRING - REPLACE THIS LATER
+        std::string window_name;
+        GLFWwindow *window;
+};
 } // namescape te
