@@ -18,7 +18,9 @@ TeTestApp::~TeTestApp() {
 void TeTestApp::run() {
     while(!te_window.should_close()) {
         glfwPollEvents();
+        draw_frame();
     }
+    vkDeviceWaitIdle(te_device.device());
 }
 
 void TeTestApp::create_pipeline_layout() {
@@ -73,7 +75,7 @@ void TeTestApp::create_command_buffers() {
         render_pass_info.clearValueCount = static_cast<uint32_t>(clear_values.size());
         render_pass_info.pClearValues = clear_values.data();
 
-        vkCmdBeginRenderPass(command_buffers[1], &render_pass_info, VK_SUBPASS_CONTENTS_INLINE);
+        vkCmdBeginRenderPass(command_buffers[i], &render_pass_info, VK_SUBPASS_CONTENTS_INLINE);
 
         te_pipeline->bind(command_buffers[i]);
         vkCmdDraw(command_buffers[i], 3, 1, 0, 0);
@@ -89,6 +91,13 @@ void TeTestApp::create_command_buffers() {
 void TeTestApp::draw_frame() {
     uint32_t image_index;
     auto result = te_swap_chain.acquireNextImage(&image_index);
+    if(result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) {
+        throw std::runtime_error("Failed to acquire swap chain image");
+    }
+    result = te_swap_chain.submitCommandBuffers(&command_buffers[image_index], &image_index);
+    if(result != VK_SUCCESS) {
+        throw std::runtime_error("Failed to present swap chain image");
+    }
 }
 
 } // namespace te
