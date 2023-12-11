@@ -52,7 +52,7 @@ TeSwapChain::~TeSwapChain() {
 }
 
 VkResult TeSwapChain::acquireNextImage(uint32_t *imageIndex) {
-  vkWaitForFences(
+  vkWaitForFences(                      // CPU will block here after 2 command buffers have been submitted until it executes one
       device.device(),
       1,
       &inFlightFences[currentFrame],

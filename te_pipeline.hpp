@@ -28,6 +28,8 @@ public:
     TePipeline(const TePipeline&) = delete;
     void operator=(const TePipeline&) = delete;
 
+    void bind(VkCommandBuffer command_buffer);
+
     static pipeline_config_info default_pipeline_config(uint32_t width, uint32_t height);
 
 private:

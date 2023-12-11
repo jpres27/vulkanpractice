@@ -13,6 +13,7 @@ namespace te {
 
 class TeSwapChain {
  public:
+  // max amt of command buffers that can be in submission at once
   static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
 
   TeSwapChain(TeDevice &deviceRef, VkExtent2D windowExtent);
