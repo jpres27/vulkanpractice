@@ -18,6 +18,8 @@ class TeWindow {
             return glfwWindowShouldClose(window);
         }
 
+        VkExtent2D getExtent() { return {static_cast<uint32_t>(width), static_cast<uint32_t>(height)}; }
+
         void create_window_surface(VkInstance instance, VkSurfaceKHR *surface);
 
     private:
